@@ -12,6 +12,7 @@ class Cell{
     else{
       this.live();
     }
+    this.livingNeighbors = 0;
   }
 
   die(){
@@ -94,9 +95,23 @@ function checkNeighbors(){
   }
 }
 
+function updateCells(){
+  for(let i = 0; i < board.length; i++){
+    for(let x = 0; x < board[i].length; x++){
+      board[i][x].updateState();
+    }
+  }
+}
+
 // tests
-generateBoard(5,5);
+generateBoard(2,2);
 console.table(board);
 drawBoard();
 checkNeighbors();
-console.log(`The cell in row 1 column 2 has ${board[1][2].livingNeighbors} neighbors alive`);
+console.log(`The cell in row 1 column 2 has ${board[1][1].livingNeighbors} neighbors alive`);
+
+prompt("Press any key")
+updateCells()
+console.log(board[1][1].livingNeighbors);
+prompt("Press any key")
+drawBoard()
