@@ -25,6 +25,14 @@ class Cell{
     this.alive = true;
     this.icon = " @ ";
   }
+
+  incrementNeighbors(){
+    this.livingNeighbors++ ;
+  }
+
+  isAlive(){
+    return this.alive;
+  }
 }
 
 //global vars
@@ -62,7 +70,33 @@ function drawBoard(){
   console.log(`Generation: ${generation}`);
 }
 
+function checkNeighbors(){
+  for(let i = 0; i < board.length; i++){
+    for(let j = 0; j < board[i].length; j++){
+      let cordX = i;
+      let cordY = j;
+      if(cordX + 1 < board.length){
+        //right and right diagonals
+        if(board[cordX + 1][cordY].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY + 1 < board[i].length && board[cordX + 1][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY - 1 >= 0 && board[cordX + 1][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+      }
+      if(cordX - 1 >= 0){
+        //left and left diagonals
+        if(board[cordX - 1][cordY].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY + 1 < board[i].length && board[cordX - 1][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY - 1 >= 0 && board[cordX - 1][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+      }
+      //up and down
+      if(cordY + 1 < board[i].length && board[cordX][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+      if(cordY - 1 >= 0 && board[cordX][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+    }
+  }
+}
+
 // tests
-generateBoard(5,3);
+generateBoard(5,5);
 console.table(board);
 drawBoard();
+checkNeighbors();
+console.log(`The cell in row 1 column 2 has ${board[1][2].livingNeighbors} neighbors alive`);
