@@ -22,7 +22,7 @@ class Cell{
   }
 
   live(){
-    if(this.alive) return;
+    if(this.alive || this.livingNeighbors === 2) return;
     this.alive = true;
     this.icon = " @ ";
   }
@@ -69,6 +69,7 @@ function drawBoard(){
     console.log(line);
   }
   console.log(`Generation: ${generation}`);
+  generation++;
 }
 
 function checkNeighbors(){
@@ -103,15 +104,19 @@ function updateCells(){
   }
 }
 
-// tests
-generateBoard(2,2);
-console.table(board);
-drawBoard();
-checkNeighbors();
-console.log(`The cell in row 1 column 2 has ${board[1][1].livingNeighbors} neighbors alive`);
+async function run(){
+  generateBoard(70,70);
+  while(true){
+    drawBoard();
+    checkNeighbors();
+    updateCells();
+    await sleep(1000);
+  }
+}
 
-prompt("Press any key")
-updateCells()
-console.log(board[1][1].livingNeighbors);
-prompt("Press any key")
-drawBoard()
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//execution
+run();
