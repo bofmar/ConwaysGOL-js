@@ -1,3 +1,4 @@
+// set up readline
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
@@ -49,7 +50,7 @@ let columns;
 let rows;
 let speed;
 
-// initial state generators
+// initial state generator
 function generateBoard(rows,columns){
   if(rows < 1 || !rows) rows = 1; //failsafe for rows
   if(columns < 1 || !columns) columns = rows; //make rows and columns the same if no columns are defined
