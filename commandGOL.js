@@ -45,6 +45,9 @@ class Cell{
 //global vars
 const board = [];
 let generation = 0;
+let columns;
+let rows;
+let speed;
 
 // initial state generators
 function generateBoard(rows,columns){
@@ -110,13 +113,30 @@ function updateCells(){
   }
 }
 
+function setup(){
+  rl.question("How many rows: ", (userRows)=>{
+    rows = userRows;
+    rl.question("How many columns: ",(userColumns)=>{
+      columns = userColumns;
+      rl.question("How long between each generation(in milliseconds): ", (userSpeed)=>{
+        speed =userSpeed;
+        rl.close();
+      })
+    })
+  })
+}
+
+rl.on("close", ()=>{
+  run();
+})
+
 async function run(){
-  generateBoard(70,70);
+  generateBoard(rows,columns);
   while(true){
     drawBoard();
     checkNeighbors();
     updateCells();
-    await sleep(1000);
+    await sleep(speed);
   }
 }
 
@@ -125,4 +145,4 @@ function sleep(ms) {
 }
 
 //execution
-run();
+setup();
