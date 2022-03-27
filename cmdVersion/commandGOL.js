@@ -134,9 +134,17 @@ rl.on("close", ()=>{
 });
 
 function splashScreen(){
-  fig("Conway's Game Of Life",{
+  fig("Conway's Game Of Life\n",{
     font: 'DOS Rebel',
   },(err,data)=>{
+    if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+    }
+    console.log(data)
+  });
+  fig("by Marios Mpofilakis",(err,data)=>{
     if (err) {
       console.log('Something went wrong...');
       console.dir(err);
@@ -163,3 +171,4 @@ function sleep(ms) {
 }
 
 //execution
+splashScreen();
