@@ -116,23 +116,6 @@ function updateCells(){
   }
 }
 
-function setup(){
-  rl.question("How many rows: ", (userRows)=>{
-    rows = userRows;
-    rl.question("How many columns: ",(userColumns)=>{
-      columns = userColumns;
-      rl.question("How long between each generation(in milliseconds): ", (userSpeed)=>{
-        speed =userSpeed;
-        rl.close();
-      })
-    })
-  })
-}
-
-rl.on("close", ()=>{
-  run();
-});
-
 function splashScreen(){
   fig("Conway's Game Of Life\n",{
     font: 'DOS Rebel',
@@ -152,9 +135,27 @@ function splashScreen(){
     }
     console.log(data)
   });
-  sleep(3000);
-  console.clear();
 }
+
+async function setup(){
+  console.clear();
+  splashScreen();
+  await sleep(500);
+  rl.question("How many rows: ", (userRows)=>{
+    rows = userRows;
+    rl.question("How many columns: ",(userColumns)=>{
+      columns = userColumns;
+      rl.question("How long between each generation(in milliseconds): ", (userSpeed)=>{
+        speed =userSpeed;
+        rl.close();
+      })
+    })
+  })
+}
+
+rl.on("close", ()=>{  
+  run();
+});
 
 async function run(){
   generateBoard(rows,columns);
@@ -171,4 +172,4 @@ function sleep(ms) {
 }
 
 //execution
-splashScreen();
+setup();
