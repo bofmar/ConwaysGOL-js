@@ -4,6 +4,8 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+//set up figlet
+const fig = require("figlet");
 
 class Cell{
   constructor(alive){
@@ -129,7 +131,22 @@ function setup(){
 
 rl.on("close", ()=>{
   run();
-})
+});
+
+function splashScreen(){
+  fig("Conway's Game Of Life",{
+    font: 'DOS Rebel',
+  },(err,data)=>{
+    if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+    }
+    console.log(data)
+  });
+  sleep(3000);
+  console.clear();
+}
 
 async function run(){
   generateBoard(rows,columns);
@@ -146,4 +163,3 @@ function sleep(ms) {
 }
 
 //execution
-setup();
