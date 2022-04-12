@@ -56,10 +56,21 @@ button.addEventListener("click", ()=>{
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
   const totalDivs = Math.pow(gridSize, 2);
+  let x = 0;
+  let y = 0;
   for (let i = 0; i < totalDivs; i++) {
     console.log("adding dis");
     const newDiv = document.createElement("div");
     newDiv.classList.add("cell");
+    newDiv.dataset.x = x;
+    newDiv.dataset.y = y;
+    
+    // assign each div the co-ordinates of its' linked Cell
+    if(y > totalDivs - 1){
+      y = 0;
+      x++
+    }
+    else y++;
     gameArea.appendChild(newDiv);
   } // makes a grid of size gridSize^2 and gives it's children a border
 
