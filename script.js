@@ -59,14 +59,13 @@ button.addEventListener("click", ()=>{
   let x = 0;
   let y = 0;
   for (let i = 0; i < totalDivs; i++) {
-    console.log("adding dis");
     const newDiv = document.createElement("div");
     newDiv.classList.add("cell");
     newDiv.dataset.x = x;
     newDiv.dataset.y = y;
     
     // assign each div the co-ordinates of its' linked Cell
-    if(y > totalDivs - 1){
+    if(y == gridSize - 1){
       y = 0;
       x++
     }
@@ -93,25 +92,33 @@ function activateColoring() {
   cells.forEach(cell => cell.addEventListener("mouseover", changeState));
 
   //when user clicks on a cell, always color that cell
-  cells.forEach(cell => cell.addEventListener("click", (e) => clickChangeState));
+  cells.forEach(cell => cell.addEventListener("click",clickChangeState));
 }
 
 function changeState(e) {
+  const x = e.target.dataset.x;
+  const y = e.target.dataset.y;
   if (canChangeColor) {
       if(e.target.style.backgroundColor == "black"){
         e.target.style.backgroundColor = "white";
+        board[x][y].die();
       }
       else{
         e.target.style.backgroundColor = "black";
+        board[x][y].live();
       }
   }
 } // allow the user to change the cell's state while holding down left mouse
 
 function clickChangeState(e){
+  const x = e.target.dataset.x;
+  const y = e.target.dataset.y;
   if(e.target.style.backgroundColor == "black"){
     e.target.style.backgroundColor = "white";
+    board[x][y].die();
   }
   else{
     e.target.style.backgroundColor = "black";
+    board[x][y].live();
   }
 }// allow the user to change the cell's state with single click
