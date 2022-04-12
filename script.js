@@ -5,6 +5,41 @@ const button = document.querySelector("button");
 let gridSize = 16;
 let canChangeColor = false;
 
+class Cell{
+  constructor(alive){
+    this.alive = alive;
+    this.livingNeighbors = 0;
+  }
+
+  updateState(){
+    if(this.livingNeighbors < 2 || this.livingNeighbors > 3){
+      this.die()
+    }
+    else{
+      this.live();
+    }
+    this.livingNeighbors = 0;
+  }
+
+  die(){
+    if(!this.alive) return;
+    this.alive = false;
+  }
+
+  live(){
+    if(this.alive || this.livingNeighbors === 2) return;
+    this.alive = true;
+  }
+
+  incrementNeighbors(){
+    this.livingNeighbors++ ;
+  }
+
+  isAlive(){
+    return this.alive;
+  }
+}
+
 button.addEventListener("click", ()=>{
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
