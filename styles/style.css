@@ -7,7 +7,14 @@
 }
 
 .game-area{
+  width: 50vw;
+  height: 50vh;
   display: grid;
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-template-rows: repeat(var(--grid-size),1fr);
+}
+
+.cell{
+  border: 1px solid black;
+  aspect-ratio: 1;
 }
