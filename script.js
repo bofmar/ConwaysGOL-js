@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
-const button = document.querySelector("button");
+const makeGrid = document.querySelector("#grid");
+const run = document.querySelector("#run");
 
 let gridSize = 16;
 let canChangeColor = false;
@@ -52,7 +53,56 @@ function generateBoard(gridSize){
   }
 }
 
-button.addEventListener("click", ()=>{
+function checkNeighbors(){
+  for(let i = 0; i < board.length; i++){
+    for(let j = 0; j < board[i].length; j++){
+      let cordX = i;
+      let cordY = j;
+      if(cordX + 1 < board.length){
+        //right and right diagonals
+        if(board[cordX + 1][cordY].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY + 1 < board[i].length && board[cordX + 1][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY - 1 >= 0 && board[cordX + 1][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+      }
+      if(cordX - 1 >= 0){
+        //left and left diagonals
+        if(board[cordX - 1][cordY].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY + 1 < board[i].length && board[cordX - 1][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+        if(cordY - 1 >= 0 && board[cordX - 1][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+      }
+      //up and down
+      if(cordY + 1 < board[i].length && board[cordX][cordY + 1].isAlive()) board[i][j].incrementNeighbors();
+      if(cordY - 1 >= 0 && board[cordX][cordY - 1].isAlive()) board[i][j].incrementNeighbors();
+    }
+  }
+} // checks all the neighbors of a cell
+
+function updateCells(){
+  for(let i = 0; i < board.length; i++){
+    for(let x = 0; x < board[i].length; x++){
+      board[i][x].updateState();
+      if(board[i][x].isAlive()){
+        const gridItems = document.querySelectorAll(`[data-x="${i}"]`);
+        gridItems.forEach(item =>{
+          if(item.dataset.y == x){
+            console.log(item);
+            item.style.backgroundColor = "black";
+          }
+        });
+      }
+      else{
+        const gridItems = document.querySelectorAll(`[data-x="${i}"]`);
+        gridItems.forEach(item =>{
+          if(item.dataset.y == x){
+            item.style.backgroundColor = "white";
+          }
+        });
+      }
+    }
+  }
+} // TO DO change the x i y x to something that makes sense
+
+makeGrid.addEventListener("click", ()=>{
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
   const totalDivs = Math.pow(gridSize, 2);
@@ -122,3 +172,17 @@ function clickChangeState(e){
     board[x][y].live();
   }
 }// allow the user to change the cell's state with single click
+
+run.addEventListener("click", ()=>{
+  runLogic();
+});
+
+async function runLogic(){
+  checkNeighbors();
+  updateCells();
+  await sleep(500);
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
