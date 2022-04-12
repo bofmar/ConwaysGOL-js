@@ -4,6 +4,7 @@ const button = document.querySelector("button");
 
 let gridSize = 16;
 let canChangeColor = false;
+const board = [];
 
 class Cell{
   constructor(alive){
@@ -40,6 +41,17 @@ class Cell{
   }
 }
 
+function generateBoard(gridSize){
+  let innerArr;
+  for(let i = 0; i < gridSize; i++){
+    innerArr = []
+    for(let x = 0; x < gridSize; x++){
+      innerArr.push(new Cell(false)); //all cells are dead initially
+    }
+    board.push(innerArr);
+  }
+}
+
 button.addEventListener("click", ()=>{
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
@@ -50,6 +62,9 @@ button.addEventListener("click", ()=>{
     newDiv.classList.add("cell");
     gameArea.appendChild(newDiv);
   } // makes a grid of size gridSize^2 and gives it's children a border
+
+  generateBoard(gridSize); // make an array of Cells the same size as the grid
+
   activateColoring();
 });
 
