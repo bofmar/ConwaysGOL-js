@@ -81,26 +81,21 @@ function updateCells(){
   for(let i = 0; i < board.length; i++){
     for(let x = 0; x < board[i].length; x++){
       board[i][x].updateState();
+      // select the corresponding div
+      const targetDiv = document.getElementById(`${i}${x}`);
       if(board[i][x].isAlive()){
-        const gridItems = document.querySelectorAll(`[data-x="${i}"]`);
-        gridItems.forEach(item =>{
-          if(item.dataset.y == x){
-            console.log(item);
-            item.style.backgroundColor = "black";
-          }
-        });
+        targetDiv.style.backgroundColor = "black";
       }
       else{
-        const gridItems = document.querySelectorAll(`[data-x="${i}"]`);
-        gridItems.forEach(item =>{
-          if(item.dataset.y == x){
-            item.style.backgroundColor = "white";
-          }
-        });
+        targetDiv.style.backgroundColor = "white";
       }
     }
   }
-} // TO DO change the x i y x to something that makes sense
+}
+
+
+// CLIENT FACING RELATED FUNCTIONS
+
 
 makeGrid.addEventListener("click", ()=>{
   gameArea.style.setProperty("--grid-size", gridSize);
@@ -113,8 +108,8 @@ makeGrid.addEventListener("click", ()=>{
     newDiv.classList.add("cell");
     newDiv.dataset.x = x;
     newDiv.dataset.y = y;
-    
     // assign each div the co-ordinates of its' linked Cell
+    newDiv.id = `${x}${y}`; // give divs a unique id so they can be accessed easier
     if(y == gridSize - 1){
       y = 0;
       x++
@@ -177,3 +172,6 @@ step.addEventListener("click", ()=>{
   checkNeighbors();
   updateCells();
 }); // steps through each generation manually
+
+
+// HELPER FUNCTIONS
