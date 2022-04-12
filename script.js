@@ -90,14 +90,28 @@ function activateColoring() {
       canChangeColor = false;
   }); //disable coloring if the user lifts his mouse up anywhere in the body
 
-  cells.forEach(cell => cell.addEventListener("mouseover", changeColor));
+  cells.forEach(cell => cell.addEventListener("mouseover", changeState));
 
   //when user clicks on a cell, always color that cell
-  cells.forEach(cell => cell.addEventListener("click", (e) => e.target.style.backgroundColor = "black"));
+  cells.forEach(cell => cell.addEventListener("click", (e) => clickChangeState));
 }
 
-function changeColor(e) {
+function changeState(e) {
   if (canChangeColor) {
-      e.target.style.backgroundColor = "black";
+      if(e.target.style.backgroundColor == "black"){
+        e.target.style.backgroundColor = "white";
+      }
+      else{
+        e.target.style.backgroundColor = "black";
+      }
   }
-} // allow the user to change color while mouse is held down
+} // allow the user to change the cell's state while holding down left mouse
+
+function clickChangeState(e){
+  if(e.target.style.backgroundColor == "black"){
+    e.target.style.backgroundColor = "white";
+  }
+  else{
+    e.target.style.backgroundColor = "black";
+  }
+}// allow the user to change the cell's state with single click
