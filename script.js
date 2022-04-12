@@ -1,7 +1,7 @@
 const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
 const makeGrid = document.querySelector("#grid");
-const run = document.querySelector("#run");
+const step = document.querySelector("#step");
 
 let gridSize = 16;
 let canChangeColor = false;
@@ -173,16 +173,7 @@ function clickChangeState(e){
   }
 }// allow the user to change the cell's state with single click
 
-run.addEventListener("click", ()=>{
-  runLogic();
-});
-
-async function runLogic(){
+step.addEventListener("click", ()=>{
   checkNeighbors();
   updateCells();
-  await sleep(500);
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+}); // steps through each generation manually
