@@ -6,12 +6,17 @@
   --grid-size: 1;
 }
 
+body{
+  background-color: blue;
+}
+
 .game-area{
-  width: 50vw;
-  height: 50vh;
+  width: 50%;
+  height: 50%;
   display: grid;
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-template-rows: repeat(var(--grid-size),1fr);
+  background-color: white;
 }
 
 .cell{
