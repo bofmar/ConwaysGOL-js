@@ -4,21 +4,79 @@
 
 :root{
   --grid-size: 1;
+  --white: #FBF7F5;
+}
+
+a{
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+@font-face {
+  font-family: 'chalkboy';
+  src: url('../fonts/chalkboy-font/misc/Chalkboy\ Free\ Trial-854d.woff2') format('woff2'),
+  url('../fonts/chalkboy-font/misc/Chalkboy\ Free\ Trial-c74c.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'chalk';
+  src: url('../fonts/CfBlackboardPersonalRegular-AKPg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body{
-  background-color: blue;
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   grid-template-areas: 
     "header"
     "play"
     "controls";
+  overflow: hidden;
 }
 
+/* * * * * * * 
+    Header
+* * * * * * * */
+
 header{
-  background-color: red;
   grid-area: header;
+  background: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
+  background-size: cover;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+header h1{
+  font-family: chalkboy;
+  font-size: 5rem;
+  padding-left: 30px;
+}
+
+header ul{
+  justify-self: center;
+  display: flex;
+  gap: 35px;
+}
+
+header li{
+  font-family: chalk;
+  font-size: 2rem;
+  transition: transform 200ms ease-out;
+}
+
+header li:hover{
+  transform: scale(1.15);
+}
+
+header a{
+  cursor: pointer;
 }
 
 .controls{
