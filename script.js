@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
 const makeGrid = document.querySelector("#grid");
+const clearButton = document.querySelector("#clear");
 const step = document.querySelector("#step");
 
 let gridSize = 100;
@@ -97,6 +98,12 @@ function updateCells(){
 // CLIENT FACING RELATED FUNCTIONS
 
 makeGrid.addEventListener("click", ()=>{
+  createGrid();
+});
+
+clearButton.addEventListener("click", ()=>{
+  gameArea.replaceChildren();
+  board.length = 0;
   createGrid();
 });
 
