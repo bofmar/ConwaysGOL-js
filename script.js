@@ -5,10 +5,17 @@ const makeGrid = document.querySelector("#grid");
 const clearButton = document.querySelector("#clear");
 const speedSelector = document.querySelector("#speed");
 const step = document.querySelector("#step");
+const play = document.querySelector("#play");
+const generationCounter = document.querySelector("#generation");
+const livingCounter = document.querySelector("#living");
+
 
 let gridSize = gridSizeForm.value;
 let speed = speedSelector.value;
 let canChangeColor = false;
+let goOn = false;
+let aliveTotal = 0;
+let generation = 0;
 const board = [];
 
 class Cell{
@@ -104,12 +111,16 @@ makeGrid.addEventListener("click", ()=>{
   gameArea.replaceChildren();
   board.length = 0;
   createGrid();
+  generationCounter.innerText = `Generation: ${generation++}`;
+  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
 });
 
 clearButton.addEventListener("click", ()=>{
   gameArea.replaceChildren();
   board.length = 0;
   createGrid();
+  generationCounter.innerText = `Generation: ${generation++}`;
+  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
 });
 
 gridSizeForm.addEventListener("change", ()=>{
@@ -135,6 +146,16 @@ speedSelector.addEventListener("change", ()=>{
   }
   speed = speedSelector.value;
 });
+
+play.addEventListener("click", (e)=>{
+  goOn = !goOn;
+  e.target.innerText = goOn ? "Stop" : "Play";
+  gameLoop();
+});
+
+step.addEventListener("click", ()=>{
+  stepOnce();
+}); // steps through each generation manually
 
 // allows the user to change the color of the cells
 function activateColoring() {
@@ -181,13 +202,10 @@ function clickChangeState(e){
   }
 }// allow the user to change the cell's state with single click
 
-step.addEventListener("click", ()=>{
-  checkNeighbors();
-  updateCells();
-}); // steps through each generation manually
-
 (function initialGridState(){
   createGrid()
+  generationCounter.innerText = `Generation: ${generation++}`;
+  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
 })(); //initialize the grid on page load
 
 
@@ -216,4 +234,32 @@ function createGrid(){
   generateBoard(gridSize); // make an array of Cells the same size as the grid
 
   activateColoring();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function stepOnce(){
+  checkNeighbors();
+  updateCells();
+  updateCounters();
+}
+
+function gameLoop(){
+  if(!goOn) return;
+  stepOnce();
+  setTimeout(gameLoop,speed);
+}
+
+function countAlive(){
+  return board.reduce((acc,row) =>{
+    return acc += row.reduce((i,cell)=> cell.isAlive() ? ++i : i ,0);
+  },0);
+}
+
+function updateCounters(){
+  generationCounter.innerText = `Generation: ${generation++}`;
+  aliveTotal = countAlive();
+  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
 }
