@@ -1,10 +1,11 @@
 const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
+const gridSizeForm = document.querySelector("#grid-size");
 const makeGrid = document.querySelector("#grid");
 const clearButton = document.querySelector("#clear");
 const step = document.querySelector("#step");
 
-let gridSize = 100;
+let gridSize = gridSizeForm.value;
 let canChangeColor = false;
 const board = [];
 
@@ -107,6 +108,18 @@ clearButton.addEventListener("click", ()=>{
   createGrid();
 });
 
+gridSizeForm.addEventListener("change", (e)=>{
+  console.log(gridSizeForm.value);
+  if(gridSizeForm.value > 100){
+    gridSizeForm.value = 100;
+    gridSizeForm.innerText = 100;
+  }
+  if(gridSizeForm.value < 10){
+    gridSizeForm.value = 10;
+    gridSizeForm.innerText = 10;
+  }
+}); // restrict the values so that the user can't put in whatever
+
 // allows the user to change the color of the cells
 function activateColoring() {
   const cells = document.querySelectorAll(".cell");
@@ -164,6 +177,7 @@ step.addEventListener("click", ()=>{
 
 // HELPER FUNCTIONS
 function createGrid(){
+  gridSize = gridSizeForm.value;
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
   const totalDivs = Math.pow(gridSize, 2);
