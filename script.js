@@ -99,6 +99,8 @@ function updateCells(){
 // CLIENT FACING RELATED FUNCTIONS
 
 makeGrid.addEventListener("click", ()=>{
+  gameArea.replaceChildren();
+  board.length = 0;
   createGrid();
 });
 
