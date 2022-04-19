@@ -21,17 +21,21 @@
     </ul>
   </header>
   <footer class="controls">
-    <button id="grid">Make grid</button>
-    <button id="clear">Clear</button>
-    <button id="step">Step</button>
-    <button id="play">Play</button>
-    <div>
-      <label for="grid-size">Grid cells</label>
-      <input type="number" min="10" max="100" id="grid-size" value="16">
-    </div>
-    <div>
-      <label for="speed">Milliseconds per generation</label>
-      <input type="number" min="100" max="10000" id="speed" value="1000" step="100">
+    <div class="grid-controls">
+      <div>
+        <label for="grid-size">Grid cells</label>
+        <input type="number" min="10" max="100" id="grid-size" value="16">
+      </div>
+      <button id="grid">Create Grid</button>
+      <button id="clear">Clear</button>
+    </div>    
+    <div class="game-controls">
+      <div>
+        <label for="speed">Speed(ms)</label>
+        <input type="number" min="100" max="10000" id="speed" value="1000" step="100">
+      </div>
+      <button id="step">Step</button>
+      <button id="play">Play</button>
     </div>
     <select name="predefined-starts" id="predefined-starts">
       <option value="glider">Glider</option>

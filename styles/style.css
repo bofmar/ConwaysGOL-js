@@ -7,11 +7,7 @@
   --white: #FBF7F5;
 }
 
-a{
-  text-decoration: inherit;
-  color: inherit;
-  cursor: auto;
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300&display=swap');
 
 @font-face {
   font-family: 'chalkboy';
@@ -36,6 +32,23 @@ body{
     "play"
     "controls";
   overflow: hidden;
+}
+
+
+a{
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+button{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 /* * * * * * * 
@@ -79,11 +92,76 @@ header a{
   cursor: pointer;
 }
 
+/* * * * * * * 
+    Controls
+* * * * * * * */
+
 .controls{
-  background-color: yellow;
+  background-color: var(--white);
   grid-area: controls;
   height: 10vh;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
 }
+
+.controls button,
+#stats{
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 3px double black;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+}
+
+.controls button{
+  transition: all 250ms ease-in;
+}
+
+.controls button:hover,
+.controls button:focus{
+  border: 3px double white;
+  background-color: black;
+  color: var(--white);
+}
+
+.grid-controls,
+.game-controls{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas: 
+    "num num"
+    "b1 b2";
+  gap: 10px;
+}
+
+.grid-controls div,
+.game-controls div{
+  grid-area: num;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-controls input{
+  flex: 1;
+}
+
+select{
+  width: 30ch;
+}
+
+#stats{
+  border-radius: 5px;
+  width: 20ch
+}
+
+/* * * * * * * 
+    Grid
+* * * * * * * */
 
 .game-area{
   width: 100vw;
