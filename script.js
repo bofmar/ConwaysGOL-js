@@ -1,3 +1,12 @@
+/*
+* TO DOs:
+* 1. Add random start through the predefined dropdown
+* 2. Add collection of predefined starts for demonstration
+* 3. Create the about page
+* 4. Write the readme for both versions
+* 5. Do SEO
+*/
+
 const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
 const gridSizeForm = document.querySelector("#grid-size");
