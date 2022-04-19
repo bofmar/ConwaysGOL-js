@@ -104,7 +104,6 @@ function updateCells(){
   }
 }
 
-
 // CLIENT FACING RELATED FUNCTIONS
 
 makeGrid.addEventListener("click", ()=>{
