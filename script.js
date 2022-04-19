@@ -3,7 +3,7 @@ const gameArea = document.querySelector(".game-area");
 const makeGrid = document.querySelector("#grid");
 const step = document.querySelector("#step");
 
-let gridSize = 16;
+let gridSize = 100;
 let canChangeColor = false;
 const board = [];
 
@@ -95,7 +95,6 @@ function updateCells(){
 
 
 // CLIENT FACING RELATED FUNCTIONS
-
 
 makeGrid.addEventListener("click", ()=>{
   createGrid();

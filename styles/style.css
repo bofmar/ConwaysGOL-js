@@ -8,15 +8,34 @@
 
 body{
   background-color: blue;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: 
+    "header"
+    "play"
+    "controls";
+}
+
+header{
+  background-color: red;
+  grid-area: header;
+}
+
+.controls{
+  background-color: yellow;
+  grid-area: controls;
+  height: 10vh;
 }
 
 .game-area{
-  width: 50%;
-  height: 50%;
+  width: 100vw;
+  height: 80vh;
   display: grid;
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-template-rows: repeat(var(--grid-size),1fr);
   background-color: white;
+  grid-area: play;
+  overflow: scroll;
 }
 
 .cell{
