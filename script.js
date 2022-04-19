@@ -3,9 +3,11 @@ const gameArea = document.querySelector(".game-area");
 const gridSizeForm = document.querySelector("#grid-size");
 const makeGrid = document.querySelector("#grid");
 const clearButton = document.querySelector("#clear");
+const speedSelector = document.querySelector("#speed");
 const step = document.querySelector("#step");
 
 let gridSize = gridSizeForm.value;
+let speed = speedSelector.value;
 let canChangeColor = false;
 const board = [];
 
@@ -110,8 +112,7 @@ clearButton.addEventListener("click", ()=>{
   createGrid();
 });
 
-gridSizeForm.addEventListener("change", (e)=>{
-  console.log(gridSizeForm.value);
+gridSizeForm.addEventListener("change", ()=>{
   if(gridSizeForm.value > 100){
     gridSizeForm.value = 100;
     gridSizeForm.innerText = 100;
@@ -120,7 +121,20 @@ gridSizeForm.addEventListener("change", (e)=>{
     gridSizeForm.value = 10;
     gridSizeForm.innerText = 10;
   }
-}); // restrict the values so that the user can't put in whatever
+  gridSize = gridSizeForm.value;
+});
+
+speedSelector.addEventListener("change", ()=>{
+  if(speedSelector.value > 10000){
+    speedSelector.value = 10000;
+    speedSelector.innerText = 10000;
+  }
+  if(speedSelector.value < 100){
+    speedSelector.value = 100;
+    speedSelector.innerText = 100;
+  }
+  speed = speedSelector.value;
+});
 
 // allows the user to change the color of the cells
 function activateColoring() {
@@ -179,7 +193,6 @@ step.addEventListener("click", ()=>{
 
 // HELPER FUNCTIONS
 function createGrid(){
-  gridSize = gridSizeForm.value;
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
   const totalDivs = Math.pow(gridSize, 2);
