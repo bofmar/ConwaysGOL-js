@@ -1,6 +1,6 @@
 /*
 * TO DOs:
-* 1. Add random start through the predefined dropdown
+* 1. Add random start through the predefined dropdown - DONE
 * 2. Add collection of predefined starts for demonstration
 * 3. Create the about page
 * 4. Write the readme for both versions
@@ -11,7 +11,7 @@ const body = document.querySelector("body");
 const gameArea = document.querySelector(".game-area");
 const gridSizeForm = document.querySelector("#grid-size");
 const makeGrid = document.querySelector("#grid");
-const clearButton = document.querySelector("#clear");
+const randomButton = document.querySelector("#random");
 const speedSelector = document.querySelector("#speed");
 const step = document.querySelector("#step");
 const play = document.querySelector("#play");
@@ -73,6 +73,17 @@ function generateBoard(gridSize){
   }
 }
 
+function generateRandomBoard(gridSize){
+  let innerArr;
+  for(let i = 0; i < gridSize; i++){
+    innerArr = []
+    for(let x = 0; x < gridSize; x++){
+      innerArr.push(new Cell(rand())); //random condition of initial cells
+    }
+    board.push(innerArr);
+  }
+}
+
 function checkNeighbors(){
   for(let i = 0; i < board.length; i++){
     for(let j = 0; j < board[i].length; j++){
@@ -113,22 +124,35 @@ function updateCells(){
   }
 }
 
+function colorRandomizedGrid(){
+  for(let i = 0; i < board.length; i++){
+    for(let x = 0; x < board[i].length; x++){
+      const targetDiv = document.getElementById(`${i}${x}`);
+      if(board[i][x].isAlive()){
+        targetDiv.style.backgroundColor = "black";
+      }
+      else{
+        targetDiv.style.backgroundColor = "white";
+      }
+    }
+  }
+}
+
 // CLIENT FACING RELATED FUNCTIONS
 
 makeGrid.addEventListener("click", ()=>{
   gameArea.replaceChildren();
   board.length = 0;
   createGrid();
-  generationCounter.innerText = `Generation: ${generation++}`;
-  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
+  resetCounters();
 });
 
-clearButton.addEventListener("click", ()=>{
+randomButton.addEventListener("click", ()=>{
   gameArea.replaceChildren();
   board.length = 0;
-  createGrid();
-  generationCounter.innerText = `Generation: ${generation++}`;
-  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
+  createGrid(true);
+  colorRandomizedGrid();
+  resetCounters();
 });
 
 gridSizeForm.addEventListener("change", ()=>{
@@ -211,14 +235,13 @@ function clickChangeState(e){
 }// allow the user to change the cell's state with single click
 
 (function initialGridState(){
-  createGrid()
-  generationCounter.innerText = `Generation: ${generation++}`;
-  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
+  createGrid();
+  resetCounters();
 })(); //initialize the grid on page load
 
 
 // HELPER FUNCTIONS
-function createGrid(){
+function createGrid(random = false){
   gameArea.style.setProperty("--grid-size", gridSize);
   gameArea.textContent = "";
   const totalDivs = Math.pow(gridSize, 2);
@@ -239,13 +262,14 @@ function createGrid(){
     gameArea.appendChild(newDiv);
   } // makes a grid of size gridSize^2 and gives it's children a border
 
-  generateBoard(gridSize); // make an array of Cells the same size as the grid
+  if(random === false){
+    generateBoard(gridSize); // make an array of Cells the same size as the grid
+  }
+  else{
+    generateRandomBoard(gridSize);
+  }
 
   activateColoring();
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function stepOnce(){
@@ -270,4 +294,15 @@ function updateCounters(){
   generationCounter.innerText = `Generation: ${generation++}`;
   aliveTotal = countAlive();
   livingCounter.innerText = `Living Cells: ${aliveTotal}`;
+}
+
+function resetCounters(){
+  generation = 0;
+  generationCounter.innerText = `Generation: ${generation}`;
+  aliveTotal = 0;
+  livingCounter.innerText = `Living Cells: ${aliveTotal}`;
+}
+
+function rand(){
+  return Math.random() < 0.5;
 }
