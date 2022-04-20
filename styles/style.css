@@ -144,6 +144,7 @@ header a{
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 
 .grid-controls input{
@@ -157,6 +158,16 @@ select{
 #stats{
   border-radius: 5px;
   width: 20ch
+}
+
+.predefined{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#predefined-starts{
+  font-size: 1.1rem;
 }
 
 /* * * * * * * 

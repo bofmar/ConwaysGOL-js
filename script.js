@@ -2,6 +2,9 @@
 * TO DOs:
 * 1. Add random start through the predefined dropdown - DONE
 * 2. Add collection of predefined starts for demonstration
+*   2.1 Ability to generate predefined states for the board - DONE
+*   2.2 Ability for those states to be selectable through the dropdown
+*   2.3 Add 5-10 predefined boards
 * 3. Create the about page
 * 4. Write the readme for both versions
 * 5. Do SEO
@@ -17,6 +20,7 @@ const step = document.querySelector("#step");
 const play = document.querySelector("#play");
 const generationCounter = document.querySelector("#generation");
 const livingCounter = document.querySelector("#living");
+const goButton = document.querySelector("#go");
 
 
 let gridSize = gridSizeForm.value;
@@ -124,7 +128,7 @@ function updateCells(){
   }
 }
 
-function colorRandomizedGrid(){
+function colorGeneratedGrid(){
   for(let i = 0; i < board.length; i++){
     for(let x = 0; x < board[i].length; x++){
       const targetDiv = document.getElementById(`${i}${x}`);
@@ -151,7 +155,7 @@ randomButton.addEventListener("click", ()=>{
   gameArea.replaceChildren();
   board.length = 0;
   createGrid(true);
-  colorRandomizedGrid();
+  colorGeneratedGrid();
   resetCounters();
 });
 
@@ -188,6 +192,10 @@ play.addEventListener("click", (e)=>{
 step.addEventListener("click", ()=>{
   stepOnce();
 }); // steps through each generation manually
+
+goButton.addEventListener("click", () =>{
+  generatePre(pre.glider);
+});
 
 // allows the user to change the color of the cells
 function activateColoring() {
@@ -305,4 +313,22 @@ function resetCounters(){
 
 function rand(){
   return Math.random() < 0.5;
+}
+
+function generatePre(arr){
+  gridSize = 40;
+  gameArea.replaceChildren();
+  board.length = 0;
+  createGrid();
+  resetCounters();
+  arr.map(coordinate =>{
+    board[coordinate[0]][coordinate[1]].live();
+  });
+  colorGeneratedGrid();
+}
+
+// Predefined object
+
+const pre = {
+  glider: [[4,10],[5,11],[6,11],[6,10],[6,9]]
 }
