@@ -327,6 +327,19 @@ function generatePre(arr){
   colorGeneratedGrid();
 }
 
+function getAlivePositions(){
+  let aliveArr = [];
+  board.map(row => {
+    row.map(cell => {
+      if(cell.isAlive()){
+        aliveArr.push(`[${board.indexOf(row)},${row.indexOf(cell)}]`);
+      }
+    });
+  });
+  console.log(aliveArr);
+} // get the positions of all living cells so that they can be
+  // copied into the pre object
+
 // Predefined object
 
 const pre = {
