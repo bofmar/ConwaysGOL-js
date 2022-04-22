@@ -194,7 +194,7 @@ step.addEventListener("click", ()=>{
 }); // steps through each generation manually
 
 goButton.addEventListener("click", () =>{
-  generatePre(pre.glider);
+  generatePre(pre.pentadecathlon);
 });
 
 // allows the user to change the color of the cells
@@ -343,5 +343,6 @@ function getAlivePositions(){
 // Predefined object
 
 const pre = {
-  glider: [[4,10],[5,11],[6,11],[6,10],[6,9]]
+  glider: [[4,10],[5,11],[6,11],[6,10],[6,9]],
+  pentadecathlon: [[4,9], [4,10], [4,11], [4,12], [4,13], [4,14], [5,8], [5,15], [6,7], [6,16], [7,8], [7,15], [8,9], [8,10], [8,11], [8,12], [8,13], [8,14]],
 }
