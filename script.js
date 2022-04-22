@@ -194,7 +194,7 @@ step.addEventListener("click", ()=>{
 }); // steps through each generation manually
 
 goButton.addEventListener("click", () =>{
-  generatePre(pre.pentadecathlon);
+  generatePre(pre.gliderGun);
 });
 
 // allows the user to change the color of the cells
@@ -227,7 +227,7 @@ function changeState(e) {
         board[x][y].live();
       }
   }
-} // allow the user to change the cell's state while holding down left mouse
+} // allow the user to change the cells state while holding down left mouse
 
 function clickChangeState(e){
   const x = e.target.dataset.x;
@@ -240,7 +240,7 @@ function clickChangeState(e){
     e.target.style.backgroundColor = "black";
     board[x][y].live();
   }
-}// allow the user to change the cell's state with single click
+}// allow the user to change the cells state with single click
 
 (function initialGridState(){
   createGrid();
@@ -260,7 +260,7 @@ function createGrid(random = false){
     newDiv.classList.add("cell");
     newDiv.dataset.x = x;
     newDiv.dataset.y = y;
-    // assign each div the co-ordinates of its' linked Cell
+    // assign each div the co-ordinates of its linked Cell
     newDiv.id = `${x}${y}`; // give divs a unique id so they can be accessed easier
     if(y == gridSize - 1){
       y = 0;
@@ -268,7 +268,7 @@ function createGrid(random = false){
     }
     else y++;
     gameArea.appendChild(newDiv);
-  } // makes a grid of size gridSize^2 and gives it's children a border
+  } // makes a grid of size gridSize^2 and gives its children a border
 
   if(random === false){
     generateBoard(gridSize); // make an array of Cells the same size as the grid
@@ -344,5 +344,6 @@ function getAlivePositions(){
 
 const pre = {
   glider: [[4,10],[5,11],[6,11],[6,10],[6,9]],
+  gliderGun: [[3,25], [4,23], [4,25], [5,13], [5,14], [5,21], [5,22], [5,35], [5,36], [6,12], [6,16], [6,21], [6,22], [6,35], [6,36], [7,1], [7,2], [7,11], [7,17], [7,21], [7,22], [8,1], [8,2], [8,11], [8,15], [8,17], [8,18], [8,23], [8,25], [9,11], [9,17], [9,25], [10,12], [10,16], [11,13], [11,14]], //Gosper glider gun
   pentadecathlon: [[4,9], [4,10], [4,11], [4,12], [4,13], [4,14], [5,8], [5,15], [6,7], [6,16], [7,8], [7,15], [8,9], [8,10], [8,11], [8,12], [8,13], [8,14]],
 }
