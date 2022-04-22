@@ -8,6 +8,9 @@
 * 3. Create the about page
 * 4. Write the readme for both versions
 * 5. Do SEO
+*
+* BUG Some divs are generated with the same id, causing cells to jump
+* around - FIXED
 */
 
 const body = document.querySelector("body");
@@ -117,7 +120,7 @@ function updateCells(){
     for(let x = 0; x < board[i].length; x++){
       board[i][x].updateState();
       // select the corresponding div
-      const targetDiv = document.getElementById(`${i}${x}`);
+      const targetDiv = document.getElementById(`${i}-${x}`);
       if(board[i][x].isAlive()){
         targetDiv.style.backgroundColor = "black";
       }
@@ -131,7 +134,7 @@ function updateCells(){
 function colorGeneratedGrid(){
   for(let i = 0; i < board.length; i++){
     for(let x = 0; x < board[i].length; x++){
-      const targetDiv = document.getElementById(`${i}${x}`);
+      const targetDiv = document.getElementById(`${i}-${x}`);
       if(board[i][x].isAlive()){
         targetDiv.style.backgroundColor = "black";
       }
@@ -261,7 +264,7 @@ function createGrid(random = false){
     newDiv.dataset.x = x;
     newDiv.dataset.y = y;
     // assign each div the co-ordinates of its linked Cell
-    newDiv.id = `${x}${y}`; // give divs a unique id so they can be accessed easier
+    newDiv.id = `${x}-${y}`; // give divs a unique id so they can be accessed easier
     if(y == gridSize - 1){
       y = 0;
       x++
