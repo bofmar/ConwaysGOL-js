@@ -1,0 +1,49 @@
+:root{
+  --white: #FBF7F5;
+  --primary-black: #1b1b1b;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300&display=swap');
+
+@font-face {
+  font-family: 'chalkboy';
+  src: url('../fonts/chalkboy-font/misc/Chalkboy\ Free\ Trial-854d.woff2') format('woff2'),
+  url('../fonts/chalkboy-font/misc/Chalkboy\ Free\ Trial-c74c.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'chalk';
+  src: url('../fonts/CfBlackboardPersonalRegular-AKPg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  display:flex;
+  justify-content: space-around;
+  background-color: var(--primary-black);
+}
+
+.sticky{
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+}
+
+nav{
+  order: 1;
+  background-color: red;
+}
+
+main{
+  width: 70ch;
+  order: 2;
+  background-color: green;
+}
+
+aside{
+  order: 3;
+  background-color: blue;
+}

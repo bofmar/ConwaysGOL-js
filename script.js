@@ -6,6 +6,9 @@
 *   2.2 Ability for those states to be selectable through the dropdown - DONE
 *   2.3 Add 5-10 predefined boards - DONE
 * 3. Create the about page
+*   3.1 Navigation to other pages
+*   3.2 Aside for quick access to parts of the page
+*   3.3 Both nav and Aside need to be sticky
 * 4. Write the readme for both versions
 * 5. Do SEO
 *
