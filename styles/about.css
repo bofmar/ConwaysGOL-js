@@ -1,3 +1,7 @@
+/* * * * * * * 
+    Global
+* * * * * * * */
+
 :root{
   --white: #FBF7F5;
   --primary-black: #1b1b1b;
@@ -22,8 +26,24 @@
 
 body{
   display:flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   background-color: var(--primary-black);
+  color: var(--white);
+}
+
+body >*{
+  padding-top: 10px;
+}
+
+a{
+  text-decoration: inherit;
+  color: inherit;
+  font-size: 1.5rem;
+}
+
+h3{
+  font-family: chalkboy;
+  font-size: 3rem;
 }
 
 .sticky{
@@ -32,10 +52,22 @@ body{
   top: 0;
 }
 
+/* * * * * * * 
+    Nav
+* * * * * * * */
+
 nav{
   order: 1;
-  background-color: red;
+  font-family: chalk;
 }
+
+nav li{
+  padding-top: 20px;
+}
+
+/* * * * * * * 
+    Main
+* * * * * * * */
 
 main{
   width: 70ch;
@@ -43,7 +75,42 @@ main{
   background-color: green;
 }
 
+/* * * * * * * 
+    Aside
+* * * * * * * */
+
 aside{
   order: 3;
   background-color: blue;
+}
+
+/* * * * * * * * * 
+    Transforms
+* * * * * * * * * */
+
+nav li{
+  transition: transform 200ms ease-out;
+  width: fit-content;
+}
+
+nav li:hover{
+  transform: scale(1.15);
+}
+
+nav a::after{
+  content: "";
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  background-color: var(--white);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease-out;
+}
+
+nav a:hover::after{
+  transform: scaleX(1);
+  transform-origin: left;
 }
