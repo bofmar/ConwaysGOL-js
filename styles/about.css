@@ -35,15 +35,20 @@ body >*{
   padding-top: 10px;
 }
 
-a{
+nav a,
+aside a{
   text-decoration: inherit;
   color: inherit;
   font-size: 1.5rem;
 }
 
-h3{
+nav h3{
   font-family: chalkboy;
   font-size: 3rem;
+}
+
+ol{
+  list-style: decimal;
 }
 
 .sticky{
