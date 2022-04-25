@@ -13,11 +13,11 @@
   <aside class="sticky">
     <h4>In this page</h4>
     <ul>
-      <li>Test</li>
-      <li>Test</li>
-      <li>Test</li>
-      <li>Test</li>
-      <li>Test</li>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#how-to-play">How to play</a></li>
+      <li><a href="#rules">What are the rules</a></li>
+      <li><a href="#patterns">Notable patterns</a></li>
+      <li><a href="#learn-more">Learn more</a></li>
     </ul>
   </aside>
   <nav class="sticky">
@@ -30,17 +30,17 @@
   </nav>
   <main>
     <h1>Conway's Game Of Life</h1>
-    <section>
+    <section id="intro">
       <h2>Introduction</h2>
       <p>The <b>Game of Life</b>, also known simply as Life, is a <a href="https://en.wikipedia.org/wiki/Cellular_automaton" target="_blank">cellular automaton</a> devised by the British mathematician <a href="https://en.wikipedia.org/wiki/John_Horton_Conway" target="_blank">John Horton Conway</a> in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. </p>
     </section>
-    <section>
+    <section id="how-to-play">
       <h2>How to play</h2>
       <p>As mentioned before, the Game of Life is a zero-player game that automaticaly playes out, depending on the initial state of the board. </p>
       <p> In our game page, you have the options of creating a custom sized board (10x10 minimum size, 100 X 100 maximum size) and then manualy create the initial state yourself by clicking on the cells. A black cell on the grid represents a living cell and a white cell is a dead one. Note that clicking on a black cell will turn it white and vice versa</p>
       <p>We also give you the possibility of starting with a random board by clicking the random button, or with one of several demo setups available via the dropdown menu.</p>
     </section>
-    <section>
+    <section id="rules">
       <h2>What are the rules</h2>
       <p>Each cell in the two dimensional grid can be at one of two possible states <i>living</i> or <i>dead</i>(sometimes also refered to as populated or upopulated). Every cell interacts with its eight neighbors to determine its state in the next game cycle (hereby refered to as generation). At each new generation the following transitions will occur</p>
       <ol>
@@ -50,7 +50,7 @@
         <li>A dead cell with exactly three living neighbors becomes alive as if by reproduction</li>
       </ol>
     </section>
-    <section>
+    <section id="patterns">
       <h2>Notable patterns</h2>
       <p>Many different patterns have been observed in the Game Of Life, and people have been classifying them in accordance to their behavior.</p>
       <h3>The still life paterns</h3>
@@ -76,7 +76,7 @@
       <h3>Guns and other generators</h3>
       <p>Coway originally that no pattern can grow indefinitely. This was eventualy proven wrong by a team in <a href="https://en.wikipedia.org/wiki/Massachusetts_Institute_of_Technology" target="_blank">Masachusettes Institute of Technology</a> lead by <a href="https://en.wikipedia.org/wiki/Bill_Gosper" target="_blank">Bill Gosper</a>. Gosper and his team came up with the concept of the Gosper Glidr Gun, a pattern that, on the 15th generation and every 30 generations thereafter, creates a glider and sends it off, thus achieving infinite growth. Since then a lot of similar patterns have been created (such as the Simkin glider gun). You can test Gosper's gun in the game area by choosing it from the dropdown menu</p>
     </section>
-    <section>
+    <section id="learn-more">
       <h2>Learn More</h2>
       <p>Read through the original submission of Conway's Game Of Life <a href="https://web.stanford.edu/class/sts145/Library/life.pdf" target="_blank">here</a></p>
       <p>Watch a series of interviews with Conway himself abouyt the Game of Life and his other notable contributions to mathematics <a href="https://www.youtube.com/playlist?list=PLt5AfwLFPxWIL8XA1npoNAHseS-j1y-7V" target="_blank">in this Numberphile playlist</a></p>
